@@ -77,7 +77,7 @@ int pascuas_butcher (int year) // -> Sin embargo, la fecha calculada en este met
     int b = year / 100;
     int c = year % 100;
     int d = b / 4;
-    int e = b & 4;
+    int e = b % 4;
     int f = (b + 8) / 25;
     int g = (b - f + 1) / 3;
     int h = (19*a + b - d - g + 15) % 30;
