@@ -1,6 +1,8 @@
 //Por Rodrigo Peralta   L 152 1226    K1026  rodrigo-peralta@hotmail.com.ar 	(lang: C)
 
 #include <stdio.h>
+#include<stdlib.h>
+#include<time.h>
 
 using namespace std;
 
@@ -36,12 +38,13 @@ int pascuas (int year) //uso year por que la codificacion del programa este no d
     int d = (19 * a + M) % 30; //resto de la division
     int e = (2 * b + 4 * c + 6 * d + n) % 7; //resto de la division
     
-    int diadepascuas;
+    int diadepascuas, mesdepascuas;
     
     if(d + e < 10)
     {
          diadepascuas = (d + e + 22);
-         printf("\nLa pascua en el año %d calculado por gauss sera el %d de marzo (INT: %04d).\n", year, diadepascuas, pascuas_mmdd (3, diadepascuas) );
+         printf("\nEl dia de pascuas para el año %d calculado por gauss es el %d de marzo (INT: %04d).\n", year, diadepascuas, pascuas_mmdd (3, diadepascuas) );
+         mesdepascuas = 3;
     }
     else if(d + e > 9)
     {
@@ -55,10 +58,12 @@ int pascuas (int year) //uso year por que la codificacion del programa este no d
          }
          else diadepascuas = (d + e - 9);
          
-         printf("\nLa pascua del año %d calculado por gauss sera el %d de abril (INT: %04d).\n", year, diadepascuas, pascuas_mmdd (04, diadepascuas) );
+         printf("\nEl dia de pascuas para el año %d calculado por gauss es el %d de abril (INT: %04d).\n", year, diadepascuas, pascuas_mmdd (04, diadepascuas) );
+         
+         mesdepascuas = 4;
     }
     
-    return 1;
+    return pascuas_mmdd(mesdepascuas, diadepascuas);
 }
 
 
@@ -71,7 +76,7 @@ Butcher utiliza otra forma mas compleja de calcularlo para que sea valido para c
 
 LA FUNCION CON EL ALGORITMO DE BUTCHER SERIA:*/
            
-int pascuas_butcher (int year) // -> Sin embargo, la fecha calculada en este metodo es incorrecta, y todavia no entiendo por que.
+int pascuas_butcher (int year) // -> La fecha ahora retorna igual a la de gauss.
 {
     int a = year % 19;
     int b = year / 100;
@@ -94,7 +99,7 @@ int pascuas_butcher (int year) // -> Sin embargo, la fecha calculada en este met
     printf("\nEl dia de pascuas para el año %d calculado por butcher es el %d/%d \n\n", year, diadepascuas, mesdepascuas);
     
     init();
-    return 1;
+    return pascuas_mmdd(mesdepascuas, diadepascuas);
 }
 
 int pascuas_mmdd (int mes, int dia) 
@@ -111,7 +116,7 @@ void init()
 {
     int inputyear;
     
-    printf ("Escribi el año que queres ver la fecha de pascuas [1583+]:"); //no se me ocurrio como agregar un "sanity check", si el usuario mete un non int se rompe todo.
+    printf ("Escribi el año que queres ver la fecha de pascuas [>1583]:"); //no se me ocurrio como agregar un "sanity check", si el usuario mete un non int se rompe todo.
     if(scanf("%d", &inputyear) != 1)
     {
 		init();
@@ -137,7 +142,16 @@ void init()
 
 int main()
 {
+	srand ( time(NULL) );
+	
+	int number = rand() % 100 + 1;
+    if(number <= 50)
+    {//El hello world de Schröndinger.
+		printf("HOLA UTN\n\n");
+	}
+	
     printf("PASCUAS (o dia del chocolate para aquellos que no la festejan)\n\n");
+    
     init();
     return 0;
 }
