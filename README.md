@@ -13,7 +13,10 @@ Simplemente tipeen el año del que quieren calcular la fecha de pascuas y las fu
 
 ### Dependencias
 
-stdio.h como include para C.   
+stdio.h     
+stdlib.h    
+time.h    
+Includes para C     
 
 Metodo de butcher sacado de las siguientes fuentes   
 http://es.wikipedia.org/wiki/Computus   
